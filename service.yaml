@@ -1,0 +1,23 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: rest-api-service
+  namespace: default
+  selfLink: /api/v1/namespaces/default/services/rest-api-deployment
+  labels:
+    app: rest-api
+
+spec:
+  selector:
+    app: rest-api-deployment
+    type: LoadBalancer
+    sessionAffinity: None
+    externalTrafficPolicy: Cluster
+
+  ports:
+    - protocol: TCP
+      port: 8005
+      targetPort: http
+
+status:
+  loadBalancer:
